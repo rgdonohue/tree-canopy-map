@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tree Canopy Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+      
+<script type="cartocss/html" id="district-styles">
+
+    #cartodb_query{
+      polygon-fill: #EDF8FB;
+      polygon-opacity: 0.8;
+      line-color: #FFF;
+      line-width: 0.5;
+      line-opacity: 1;
+    }
+    #cartodb_query [ canopy_per <= 31.916323] {
+       polygon-fill: #005824;
+    }
+    #cartodb_query [ canopy_per <= 30.342439] {
+       polygon-fill: #238B45;
+    }
+    #cartodb_query [ canopy_per <= 28.895253] {
+       polygon-fill: #41AE76;
+    }
+    #cartodb_query [ canopy_per <= 26.369205] {
+       polygon-fill: #66C2A4;
+    }
+    #cartodb_query [ canopy_per <= 24.412925] {
+       polygon-fill: #CCECE6;
+    }
+    #cartodb_query [ canopy_per <= 22.518518] {
+       polygon-fill: #D7FAF4;
+    }
+    #cartodb_query [ canopy_per <= 21.612261] {
+       polygon-fill: #EDF8FB;
+    }
+    
+</script>
+      
+<script>
+    var map = new L.Map("map", {
+        center: [38.04,-84.50],
+        zoom: 12
+    });
+    
+    var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+});
+    
+    map.addLayer(layer);
+     
+    
+     $.getJSON('https://rgdonohue.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM cartodb_query', function(data) {
+        L.geoJson(data).addTo(map);
+        
+    });
+    
+    
+    
+  
+
+</script>
+  </body>
+</html>
+Status API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help
