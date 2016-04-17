@@ -175,6 +175,15 @@ html, body, #map,.main-container {
     background: whitesmoke;
     
 }
+#prop-vals {
+    position: absolute;
+    width: 25%;
+    height: 200px;
+    bottom: 0;
+    background: whitesmoke;
+    left: 500px;
+    
+}
 
 
 
