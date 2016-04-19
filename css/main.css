@@ -166,23 +166,45 @@ html, body, #map,.main-container {
 .leaflet-control-container .leaflet-left {
     top: 90px;
 }
+element.style {
+    width: 200px;
+    height: 200px;
+}
 #carbon {
     z-index: 10;
     position: absolute;
     width: 25%;
     height: 200px;
     bottom: 0;
-    background: whitesmoke;
+    background: transparent;
     
 }
 #prop-vals {
+    z-index: 10;
     position: absolute;
     width: 25%;
     height: 200px;
     bottom: 0;
-    background: whitesmoke;
-    left: 500px;
-    
+    background: transparent;
+    left: 250px;    
+}
+#pollutants {
+    z-index: 10;
+    position: absolute;
+    width: 25%;
+    height: 200px;
+    bottom: 0;
+    background: transparent;
+    left: 600px;    
+}
+#stormwater {
+    z-index: 10;
+    position: absolute;
+    width: 25%;
+    height: 200px;
+    bottom: 0;
+    background: transparent;
+    left: 800px;    
 }
 
 
