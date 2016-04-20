@@ -71,8 +71,10 @@ body {
 
 .header-container {
     border-bottom: 4px solid lightgreen;
-    width: 100%;
+    width: 75%;
     position: absolute;
+    left: 0;
+    padding-left: 15px;
     z-index: 100;
 }
 
@@ -157,57 +159,48 @@ nav a:hover {
    Author's custom styles
    ========================================================================== */
 
-html, body, #map,.main-container {
+html, body, .main-container {
     height: 100%;
     padding: 0;
     margin: 0;
 }
-
+#map {
+    width: 80%;
+    height: 100%;
+}
 .leaflet-control-container .leaflet-left {
     top: 90px;
 }
-element.style {
-    width: 200px;
-    height: 200px;
-}
-#carbon {
-    z-index: 10;
+#charts {
     position: absolute;
-    width: 25%;
-    height: 200px;
+    top: 0px;
     bottom: 0;
-    background: transparent;
+    right: 0;
+    background: whitesmoke;
+    width: 20%;
     
 }
-#prop-vals {
-    z-index: 10;
-    position: absolute;
-    width: 25%;
-    height: 200px;
-    bottom: 0;
-    background: transparent;
-    left: 250px;    
+#charts canvas {
+    width: 90%;
+    height: 130px;
+    margin: 2px 0 0 0;
+    padding: 0;
+    border-bottom: 2px solid gray;
 }
-#pollutants {
-    z-index: 10;
+.description {
     position: absolute;
-    width: 25%;
-    height: 200px;
+    left: 15px;
     bottom: 0;
-    background: transparent;
-    left: 600px;    
+    padding: 15px 8px;
+    width: 230px;
+    height: 500px;
+    overflow-y: scroll;
+    background: whitesmoke;
+    display: none;
 }
-#stormwater {
-    z-index: 10;
-    position: absolute;
-    width: 25%;
-    height: 200px;
-    bottom: 0;
-    background: transparent;
-    left: 800px;    
+.treeCanopyKey {
+    display: block;
 }
-
-
 
 
 /* ==========================================================================
