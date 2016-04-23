@@ -190,6 +190,15 @@ function createPopup() {
         var value = layer.feature.properties[allData[currentAttribute][currentView]];
     
         layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ currentView + " value: " + value);
+        
+        //hover 
+//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ currentView + " value: " + value);
+//        layer.on('mouseover', function (e) {
+//            this.openPopup();
+//        });
+//        layer.on('mouseout', function (e) {
+//            this.closePopup();
+//        });
 
     });
 }
