@@ -29,25 +29,32 @@ var currentAttribute = 'treeCanopyKey',
 var allData = {
     treeCanopyKey : {
         current : 'canopy_percent',
-        goal : 'goalcanopypercen'
+        goal : 'goalcanopypercen',
+        descrip : 'percent of canopy cover'
     },
     propertyKey : {
         current : 'propvalmillcontribute',
-        goal : 'goalpropvalmillcontribute'
+        goal : 'goalpropvalmillcontribute',
+        descrip : 'millions of $ contributed to property values, annually'
     },
     pollutantsKey: {
         current: 'airqualitylbspollutants',
-        goal: 'goalairqualitylbspollutants'
+        goal: 'goalairqualitylbspollutants',
+        descrip : 'lbs of pollutants removed from air, annually'
     },
     stormwaterKey: {
         current: 'runoffmillgallsreduced',
-        goal: 'goalrunoffmillgallsreduced'
+        goal: 'goalrunoffmillgallsreduced',
+        descrip : 'millions of gallons of runoff water reduced, annually'
     },
     carbonKey: {
         current: 'carbonstoredsequesttonsannually',
-        goal: 'goalcarbonstoredsequesttonsannually'
+        goal: 'goalcarbonstoredsequesttonsannually',
+        descrip: 'tons of carbon stored and sequestered, annually'
     }
 }
+
+console.log(allData.treeCanopyKey.descrip);
 
 function mapData(data) {
     
@@ -171,8 +178,19 @@ function showInfo() {
 
 function createPopup() {
     dataLayer.eachLayer(function(layer){
-        var attribute = layer.feature.properties[allData[currentAttribute][currentView]];
-        layer.bindPopup("value is: " + attribute);
+        var props = layer.feature.properties
+        
+        //current and goal vals displayed
+//        var currentVal= layer.feature.properties[allData[currentAttribute].current];
+//        var goalVal = layer.feature.properties[allData[currentAttribute].goal];
+//    
+//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ "current: " + currentVal+"<br>"+ "goal: "+ goalVal);
+        
+        //just [currentView] vals shown
+        var value = layer.feature.properties[allData[currentAttribute][currentView]];
+    
+        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ currentView + " value: " + value);
+
     });
 }
 
