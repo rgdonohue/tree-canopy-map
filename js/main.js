@@ -54,7 +54,7 @@ var allData = {
     }
 }
 
-console.log(allData.treeCanopyKey.descrip);
+console.log(allData[currentAttribute].descrip);
 
 function mapData(data) {
     
@@ -178,20 +178,26 @@ function showInfo() {
 
 function createPopup() {
     dataLayer.eachLayer(function(layer){
+        
         var props = layer.feature.properties
+        var description = allData[currentAttribute].descrip;
+        console.log(description);
         
         //current and goal vals displayed
+        
 //        var currentVal= layer.feature.properties[allData[currentAttribute].current];
 //        var goalVal = layer.feature.properties[allData[currentAttribute].goal];
 //    
 //        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ "current: " + currentVal+"<br>"+ "goal: "+ goalVal);
         
         //just [currentView] vals shown
+        
         var value = layer.feature.properties[allData[currentAttribute][currentView]];
     
-        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ currentView + " value: " + value);
+        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description + "<br>"+ currentView + " value: " + value);
         
         //hover 
+        
 //        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ currentView + " value: " + value);
 //        layer.on('mouseover', function (e) {
 //            this.openPopup();
