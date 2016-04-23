@@ -11,7 +11,8 @@ var propvalsContext = document.getElementById("prop-vals").getContext("2d");
 var pollutantsContext = document.getElementById("pollutants").getContext("2d");
 var stormwaterContext = document.getElementById("stormwater").getContext("2d");
 
-$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=JSON&q=SELECT * FROM lexcouncildistricts_merge', function(data) {
+$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=JSON&q=SELECT * FROM canopydata_cd_merge', function(data) {
+    console.log(data);
   
     data.rows.sort(function(a,b) {
      
@@ -19,7 +20,7 @@ $.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=JSON&q=SELECT * FR
     
     })
     
-//    console.log(data);
+    console.log(data);
     buildTreeCanopyChart(data);
     buildCarbonChart(data);
     buildPropChart(data);
@@ -38,7 +39,7 @@ function buildTreeCanopyChart(dataObject) {
     dataObject.rows.forEach(function(d,i) {
            labels.push("District"+d.district);
            currentData.push(Number(d.canopy_percent));
-           goalData.push(Number((d.cdcalcs_goalcanopyacres/d.acres))*100);
+           goalData.push(Number(d.goalcanopypercen));
     });
 
     var data = {
@@ -91,8 +92,8 @@ function buildCarbonChart(dataObject) {
 
     dataObject.rows.forEach(function(d,i) {
            labels.push("District"+d.district);
-           currentData.push(Number(d.cdcalcs_carbonstoredsequesttonsannually));
-           goalData.push(Number(d.cdcalcs_goalcarbonstoredsequesttonsannually));
+           currentData.push(Number(d.carbonstoredsequesttonsannually));
+           goalData.push(Number(d.goalcarbonstoredsequesttonsannually));
     });
 
     var data = {
@@ -147,9 +148,8 @@ function buildPropChart(dataObject) {
 
     dataObject.rows.forEach(function(d,i) {
            labels.push("District"+d.district);
-           currentData.push(Number(d.cdcalcs_propvalmillcontribute));
-           goalData.push(Number(d.cdcalcs_goalpovvalmillcontribute
-));
+           currentData.push(Number(d.propvalmillcontribute));
+           goalData.push(Number(d.goalpropvalmillcontribute));
     });
 
 //    console.log(currentData);
@@ -205,8 +205,8 @@ function buildPollutantsChart(dataObject) {
 
     dataObject.rows.forEach(function(d,i) {
            labels.push("District"+d.district);
-           currentData.push(Number(d.cdcalcs_airqualitylbspollutants));
-           goalData.push(Number(d.cdcalcs_goalairqualitylbspollutants));
+           currentData.push(Number(d.airqualitylbspollutants));
+           goalData.push(Number(d.goalairqualitylbspollutants));
     });
 
     var data = {
@@ -259,8 +259,8 @@ function buildStormwaterChart(dataObject) {
 
     dataObject.rows.forEach(function(d,i) {
            labels.push("District"+d.district);
-           currentData.push(Number(d.cdcalcs_runoffgallsreduced));
-           goalData.push(Number(d.cdcalcs_goalrunoffgallsreduced));
+           currentData.push(Number(d.runoffmillgallsreduced));
+           goalData.push(Number(d.goalrunoffmillgallsreduced));
     });
 
     var data = {

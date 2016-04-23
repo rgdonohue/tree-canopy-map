@@ -12,9 +12,15 @@ map.addLayer(layer);
 
 //main map
 
-$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM lexcouncildistricts_merge', function(data) {
+//$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM lexcouncildistricts_merge', function(data) {
+//    mapData(data);
+//});
+
+$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM canopydata_cd_merge', function(data) {
     mapData(data);
+    console.log(data);
 });
+
 
 var currentAttribute = 'treeCanopyKey',
     currentView = 'current',
