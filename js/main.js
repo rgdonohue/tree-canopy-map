@@ -51,6 +51,7 @@ var allData = {
 
 function mapData(data) {
     
+    
     dataLayer = L.geoJson(data, {
         style : function(l) {
             return {
@@ -61,11 +62,13 @@ function mapData(data) {
                 color: 'white'
             }
         }
+        
     }).addTo(map);
     
     
     colorize();
     buildUI();
+    createPopup();
 }
 
 function colorize() {
@@ -149,12 +152,14 @@ function buildUI() {
         currentAttribute = $(this).attr('data-key');
         colorize();
         showInfo();
+        createPopup();
     });
     
     $('nav li').on('click', function() {
         currentView = $(this).attr('id');
         
         colorize();
+        createPopup();
     });
 }
 function showInfo() {
@@ -162,5 +167,12 @@ function showInfo() {
         $('.'+currentAttribute).fadeIn();
     });
     
+}
+
+function createPopup() {
+    dataLayer.eachLayer(function(layer){
+        var attribute = layer.feature.properties[allData[currentAttribute][currentView]];
+        layer.bindPopup("value is: " + attribute);
+    });
 }
 
