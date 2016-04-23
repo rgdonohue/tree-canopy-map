@@ -16,7 +16,7 @@ map.addLayer(layer);
 //    mapData(data);
 //});
 
-$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM canopydata_cd_merge', function(data) {
+$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM canopydata_cd_use', function(data) {
     mapData(data);
     console.log(data);
 });
@@ -29,27 +29,25 @@ var currentAttribute = 'treeCanopyKey',
 var allData = {
     treeCanopyKey : {
         current : 'canopy_percent',
-        goal : 'cdcalcs_goalcanopyacrespercent'
+        goal : 'goalcanopypercen'
     },
     propertyKey : {
-        current : 'cdcalcs_propvalmillcontribute',
-        goal : 'cdcalcs_goalpovvalmillcontribute'
+        current : 'propvalmillcontribute',
+        goal : 'goalpropvalmillcontribute'
     },
     pollutantsKey: {
-        current: 'cdcalcs_airqualitylbspollutants',
-        goal: 'cdcalcs_goalairqualitylbspollutants'
+        current: 'airqualitylbspollutants',
+        goal: 'goalairqualitylbspollutants'
     },
     stormwaterKey: {
-        current: 'cdcalcs_runoffgallsreduced',
-        goal: 'cdcalcs_goalrunoffgallsreduced'
+        current: 'runoffmillgallsreduced',
+        goal: 'goalrunoffmillgallsreduced'
     },
     carbonKey: {
-        current: 'cdcalcs_carbonstoredsequesttonsannually',
-        goal: 'cdcalcs_goalcarbonstoredsequesttonsannually'
+        current: 'carbonstoredsequesttonsannually',
+        goal: 'goalcarbonstoredsequesttonsannually'
     }
 }
-
-// goal for property cdcalcs_goalpovvalmillcontribute
 
 function mapData(data) {
     

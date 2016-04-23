@@ -11,7 +11,7 @@ var propvalsContext = document.getElementById("prop-vals").getContext("2d");
 var pollutantsContext = document.getElementById("pollutants").getContext("2d");
 var stormwaterContext = document.getElementById("stormwater").getContext("2d");
 
-$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=JSON&q=SELECT * FROM canopydata_cd_merge', function(data) {
+$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=JSON&q=SELECT * FROM canopydata_cd_use', function(data) {
     console.log(data);
   
     data.rows.sort(function(a,b) {
