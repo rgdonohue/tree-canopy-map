@@ -1,3 +1,4 @@
+
 var map = new L.Map("map", {
     center: [38.04,-84.50],
     zoom: 12
@@ -27,6 +28,18 @@ var allData = {
     propertyKey : {
         current : 'cdcalcs_propvalmillcontribute',
         goal : 'cdcalcs_goalpovvalmillcontribute'
+    },
+    pollutantsKey: {
+        current: 'cdcalcs_airqualitylbspollutants',
+        goal: 'cdcalcs_goalairqualitylbspollutants'
+    },
+    stormwaterKey: {
+        current: 'cdcalcs_runoffgallsreduced',
+        goal: 'cdcalcs_goalrunoffgallsreduced'
+    },
+    carbonKey: {
+        current: 'cdcalcs_carbonstoredsequesttonsannually',
+        goal: 'cdcalcs_goalcarbonstoredsequesttonsannually'
     }
 }
 
@@ -81,10 +94,19 @@ function getColor(v, values) {
         var lowColor = '#e5f5e0',
             highColor = '#006d2c'
     } else if (currentAttribute == 'propertyKey') {
-     
         var lowColor = '#fee391',
             highColor = '#993404'
+    } else if (currentAttribute == 'pollutantsKey') {
+        var lowColor = '#fa9fb5',
+            highColor = '#49006a'
+    } else if (currentAttribute == 'stormwaterKey') {
+        var lowColor = '#a6bddb',
+            highColor = '#016c59'
+    } else if (currentAttribute == 'carbonKey') {
+        var lowColor = '#bdbdbd',
+            highColor = '#525252'
     }
+    
     
     var s = d3.scale.linear();
     s.domain([values[0],values[values.length-1]]);
