@@ -130,7 +130,7 @@ function getColor(v, values) {
     s.range([lowColor,highColor]);
 //    console.log(s(v));
     
-    updateLegend();
+    updateLegend(s(v));
     
     
     return s(v);
@@ -202,19 +202,15 @@ function createPopup() {
         //just [currentView] vals shown
         
         var value = layer.feature.properties[allData[currentAttribute][currentView]];
-    
-        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description + "<br>"+ currentView + " value: " + value);
+//    
+//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description + "<br>"+ currentView + " value: " + value);
         
         //hover 
         
-//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ currentView + " value: " + value);
-//        layer.on('mouseover', function (e) {
-//            this.openPopup();
-//        });
-//        layer.on('mouseout', function (e) {
-//            this.closePopup();
-//        });
-
+        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ currentView + " value: " + value);
+        layer.on('mouseover', function (e) {
+            this.openPopup();
+        });
     });
 }
 
@@ -234,9 +230,21 @@ function drawLegend() {
     legend.addTo(map);
 }
 
-function updateLegend() {
+function updateLegend(scale) {
     
     var legend = $('.legend').html("<h3>" + allData[currentAttribute].descrip +  "</h3><ul>");
+    console.log(scale[0][4]);
+    
+    for (var i in scale) {
+
+        //append=populating legend
+        legend.append('<li><span style="background:' + i + '"></span> ' +'</li>');
+//        legend.append('<li><span style="background:' + color + '"></span> ' +
+//                    (scale[i]).toLocaleString() + ' &mdash; ' +
+//                      (scale[i+1]).toLocaleString() + "%" + '</li>');
+    }
+
+    legend.append("</ul>");
     
 }
 
