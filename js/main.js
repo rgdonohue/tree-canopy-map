@@ -1,3 +1,4 @@
+
 var map = new L.Map("map", {
     center: [38.04,-84.50],
     zoom: 12
@@ -11,9 +12,15 @@ map.addLayer(layer);
 
 //main map
 
-$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM lexcouncildistricts_merge', function(data) {
+//$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM lexcouncildistricts_merge', function(data) {
+//    mapData(data);
+//});
+
+$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM canopydata_cd_use', function(data) {
     mapData(data);
+    console.log(data);
 });
+
 
 var currentAttribute = 'treeCanopyKey',
     currentView = 'current',
@@ -22,17 +29,35 @@ var currentAttribute = 'treeCanopyKey',
 var allData = {
     treeCanopyKey : {
         current : 'canopy_percent',
-        goal : 'cdcalcs_goalcanopyacrespercent'
+        goal : 'goalcanopypercen',
+        descrip : 'percent of canopy cover'
     },
     propertyKey : {
-        current : 'cdcalcs_propvalmillcontribute',
-        goal : 'cdcalcs_goalpovvalmillcontribute'
+        current : 'propvalmillcontribute',
+        goal : 'goalpropvalmillcontribute',
+        descrip : 'millions of $ contributed to property values, annually'
+    },
+    pollutantsKey: {
+        current: 'airqualitylbspollutants',
+        goal: 'goalairqualitylbspollutants',
+        descrip : 'lbs of pollutants removed from air, annually'
+    },
+    stormwaterKey: {
+        current: 'runoffmillgallsreduced',
+        goal: 'goalrunoffmillgallsreduced',
+        descrip : 'millions of gallons of runoff water reduced, annually'
+    },
+    carbonKey: {
+        current: 'carbonstoredsequesttonsannually',
+        goal: 'goalcarbonstoredsequesttonsannually',
+        descrip: 'tons of carbon stored and sequestered, annually'
     }
 }
 
-// goal for property cdcalcs_goalpovvalmillcontribute
+console.log(allData[currentAttribute].descrip);
 
 function mapData(data) {
+    
     
     dataLayer = L.geoJson(data, {
         style : function(l) {
@@ -44,11 +69,15 @@ function mapData(data) {
                 color: 'white'
             }
         }
+        
     }).addTo(map);
     
     
     colorize();
     buildUI();
+    createPopup();
+    drawLegend();
+    updateLegend();
 }
 
 function colorize() {
@@ -81,15 +110,31 @@ function getColor(v, values) {
         var lowColor = '#e5f5e0',
             highColor = '#006d2c'
     } else if (currentAttribute == 'propertyKey') {
-     
         var lowColor = '#fee391',
             highColor = '#993404'
+    } else if (currentAttribute == 'pollutantsKey') {
+        var lowColor = '#fa9fb5',
+            highColor = '#49006a'
+    } else if (currentAttribute == 'stormwaterKey') {
+        var lowColor = '#a6bddb',
+            highColor = '#016c59'
+    } else if (currentAttribute == 'carbonKey') {
+        var lowColor = '#bdbdbd',
+            highColor = '#525252'
+        
     }
+    
     
     var s = d3.scale.linear();
     s.domain([values[0],values[values.length-1]]);
-    s.range([lowColor,highColor])
+    s.range([lowColor,highColor]);
+//    console.log(s(v));
+    
+    updateLegend(s(v));
+    
+    
     return s(v);
+    
     
 }
 
@@ -123,18 +168,83 @@ function buildUI() {
         currentAttribute = $(this).attr('data-key');
         colorize();
         showInfo();
+        createPopup();
     });
     
     $('nav li').on('click', function() {
         currentView = $(this).attr('id');
         
         colorize();
+        createPopup();
     });
 }
 function showInfo() {
     $('.description').fadeOut('slow', function() {
         $('.'+currentAttribute).fadeIn();
     });
+    
+}
+
+function createPopup() {
+    dataLayer.eachLayer(function(layer){
+        
+        var props = layer.feature.properties
+        var description = allData[currentAttribute].descrip;
+//        console.log(description);
+        
+        //current and goal vals displayed
+        
+//        var currentVal= layer.feature.properties[allData[currentAttribute].current];
+//        var goalVal = layer.feature.properties[allData[currentAttribute].goal];
+//    
+//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ "current: " + currentVal+"<br>"+ "goal: "+ goalVal);
+        
+        //just [currentView] vals shown
+        
+        var value = layer.feature.properties[allData[currentAttribute][currentView]];
+//    
+//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description + "<br>"+ currentView + " value: " + value);
+        
+        //hover 
+        
+        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ currentView + " value: " + value);
+        layer.on('mouseover', function (e) {
+            this.openPopup();
+        });
+    });
+}
+
+function drawLegend() {
+
+    //set control position
+    var legend = L.control({position: 'topright'});
+
+    //cues for when legend is adding to map: div created
+    legend.onAdd = function(map) {
+
+        var div = L.DomUtil.create('div', 'legend');
+
+        return div;
+    };
+
+    legend.addTo(map);
+}
+
+function updateLegend(scale) {
+    
+    var legend = $('.legend').html("<h3>" + allData[currentAttribute].descrip +  "</h3><ul>");
+    console.log(scale[0][4]);
+    
+    for (var i in scale) {
+
+        //append=populating legend
+        legend.append('<li><span style="background:' + i + '"></span> ' +'</li>');
+//        legend.append('<li><span style="background:' + color + '"></span> ' +
+//                    (scale[i]).toLocaleString() + ' &mdash; ' +
+//                      (scale[i+1]).toLocaleString() + "%" + '</li>');
+    }
+
+    legend.append("</ul>");
     
 }
 
