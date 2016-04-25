@@ -76,6 +76,8 @@ function mapData(data) {
     colorize();
     buildUI();
     createPopup();
+    drawLegend();
+    updateLegend();
 }
 
 function colorize() {
@@ -119,13 +121,20 @@ function getColor(v, values) {
     } else if (currentAttribute == 'carbonKey') {
         var lowColor = '#bdbdbd',
             highColor = '#525252'
+        
     }
     
     
     var s = d3.scale.linear();
     s.domain([values[0],values[values.length-1]]);
-    s.range([lowColor,highColor])
+    s.range([lowColor,highColor]);
+//    console.log(s(v));
+    
+    updateLegend();
+    
+    
     return s(v);
+    
     
 }
 
@@ -181,14 +190,14 @@ function createPopup() {
         
         var props = layer.feature.properties
         var description = allData[currentAttribute].descrip;
-        console.log(description);
+//        console.log(description);
         
         //current and goal vals displayed
         
 //        var currentVal= layer.feature.properties[allData[currentAttribute].current];
 //        var goalVal = layer.feature.properties[allData[currentAttribute].goal];
 //    
-//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ "current: " + currentVal+"<br>"+ "goal: "+ goalVal);
+//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ "current: " + currentVal+"<br>"+ "goal: "+ goalVal);
         
         //just [currentView] vals shown
         
@@ -198,7 +207,7 @@ function createPopup() {
         
         //hover 
         
-//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ currentView + " value: " + value);
+//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ currentView + " value: " + value);
 //        layer.on('mouseover', function (e) {
 //            this.openPopup();
 //        });
@@ -207,5 +216,27 @@ function createPopup() {
 //        });
 
     });
+}
+
+function drawLegend() {
+
+    //set control position
+    var legend = L.control({position: 'topright'});
+
+    //cues for when legend is adding to map: div created
+    legend.onAdd = function(map) {
+
+        var div = L.DomUtil.create('div', 'legend');
+
+        return div;
+    };
+
+    legend.addTo(map);
+}
+
+function updateLegend() {
+    
+    var legend = $('.legend').html("<h3>" + allData[currentAttribute].descrip +  "</h3><ul>");
+    
 }
 

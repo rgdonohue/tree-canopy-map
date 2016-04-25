@@ -64,7 +64,7 @@ function buildTreeCanopyChart(dataObject) {
             ]
         };
     
-    var carbonChart = new Chart(treeCanopyContext).Bar(data, chartStyles);
+    var treeCanopyChart = new Chart(treeCanopyContext).Bar(data, chartStyles);
     
     $('#treeCanopy').on('mousemove', function(e){
             try {
@@ -291,7 +291,7 @@ function buildStormwaterChart(dataObject) {
             try {
                 var activeBar = stormwaterChart.getBarsAtEvent(e);
                // console.log(activeBar);
-               // highlightDistrict(activeBar[0].label);
+                highlightDistrict(activeBar[0].label);
             } 
             catch(e) {
                 //console.log(e);
