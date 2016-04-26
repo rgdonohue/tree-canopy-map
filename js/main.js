@@ -76,8 +76,8 @@ function mapData(data) {
     colorize();
     buildUI();
     createPopup();
-    drawLegend();
-    updateLegend();
+//    drawLegend();
+//    updateLegend();
 }
 
 function colorize() {
@@ -130,7 +130,7 @@ function getColor(v, values) {
     s.range([lowColor,highColor]);
 //    console.log(s(v));
     
-    updateLegend(s(v));
+    //updateLegend(s(v));
     
     
     return s(v);
@@ -207,9 +207,31 @@ function createPopup() {
         
         //hover 
         
-        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ currentView + " value: " + value);
+        //layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ currentView + " value: " + value);
+        
+        var infoWindow = $('#hover-window');
         layer.on('mouseover', function (e) {
-            this.openPopup();
+            var props = this.feature.properties,
+                value = this.feature.properties[allData[currentAttribute][currentView]];
+      
+            infoWindow.show();
+            infoWindow.html("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ currentView + " value: " + value);
+            $(document).mousemove(function(e){
+                // first offset from the mouse position of the info window
+                infoWindow.css({"left": e.pageX + 6, "top": e.pageY - infoWindow.height() - 15}); 
+
+                // if it crashes into the top, flip it lower right
+                if(infoWindow.offset().top < 4) {
+                    infoWindow.css({"top": e.pageY + 15});
+                }
+                // do the same for crashing into the right
+                if(infoWindow.offset().left + infoWindow.width() >= $(document).width() - 40) {
+                    infoWindow.css({"left": e.pageX - infoWindow.width() - 30});
+                }
+            });
+        });
+        layer.on('mouseout', function(e) {
+             infoWindow.hide();
         });
     });
 }
