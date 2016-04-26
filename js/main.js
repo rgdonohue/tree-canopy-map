@@ -125,7 +125,7 @@ function getColor(v, values) {
     }
     
     
-    var s = d3.scale.linear();
+    var s = d3.scale.log();
     s.domain([values[0],values[values.length-1]]);
     s.range([lowColor,highColor]);
 //    console.log(s(v));
