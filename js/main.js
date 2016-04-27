@@ -30,31 +30,41 @@ var allData = {
     treeCanopyKey : {
         current : 'canopy_percent',
         goal : 'goalcanopypercen',
-        descrip : 'percent of canopy cover'
+        descrip : 'percent of canopy cover',
+        lowColor: '#e5f5e0',
+        highColor: '#006d2c'
     },
     propertyKey : {
         current : 'propvalmillcontribute',
         goal : 'goalpropvalmillcontribute',
-        descrip : 'millions of $ contributed to property values, annually'
+        descrip : 'millions of $ contributed to property values, annually',
+        lowColor: '#fee391',
+        highColor: '#993404'
     },
     pollutantsKey: {
         current: 'airqualitylbspollutants',
         goal: 'goalairqualitylbspollutants',
-        descrip : 'lbs of pollutants removed from air, annually'
+        descrip : 'lbs of pollutants removed from air, annually',
+        lowColor: '#fa9fb5',
+        highColor: '#49006a'
     },
     stormwaterKey: {
         current: 'runoffmillgallsreduced',
         goal: 'goalrunoffmillgallsreduced',
-        descrip : 'millions of gallons of runoff water reduced, annually'
+        descrip : 'millions of gallons of runoff water reduced, annually',
+        lowColor: '#a6bddb',
+        highColor: '#016c59'
     },
     carbonKey: {
         current: 'carbonstoredsequesttonsannually',
         goal: 'goalcarbonstoredsequesttonsannually',
-        descrip: 'tons of carbon stored and sequestered, annually'
+        descrip: 'tons of carbon stored and sequestered, annually',
+        lowColor: '#bdbdbd',
+        highColor: '#525252'
     }
 }
 
-console.log(allData[currentAttribute].descrip);
+//console.log(allData[currentAttribute].descrip);
 
 function mapData(data) {
     
@@ -73,17 +83,18 @@ function mapData(data) {
     }).addTo(map);
     
     
-    colorize();
+
     buildUI();
     createPopup();
-//    drawLegend();
-//    updateLegend();
+    drawLegend();
+    colorize();
+
 }
 
 function colorize() {
    
     var values = getValues(dataLayer);
-    console.log(values);
+   
     dataLayer.eachLayer(function(l) {
         
        l.setStyle({
@@ -91,6 +102,8 @@ function colorize() {
            fillOpacity: .8
        }) 
     });
+    
+    updateLegend(values);
 }
 
 function getValues(layers) {
@@ -106,33 +119,30 @@ function getValues(layers) {
     
 function getColor(v, values) {
  
-    if(currentAttribute == 'treeCanopyKey') {
-        var lowColor = '#e5f5e0',
-            highColor = '#006d2c'
-    } else if (currentAttribute == 'propertyKey') {
-        var lowColor = '#fee391',
-            highColor = '#993404'
-    } else if (currentAttribute == 'pollutantsKey') {
-        var lowColor = '#fa9fb5',
-            highColor = '#49006a'
-    } else if (currentAttribute == 'stormwaterKey') {
-        var lowColor = '#a6bddb',
-            highColor = '#016c59'
-    } else if (currentAttribute == 'carbonKey') {
-        var lowColor = '#bdbdbd',
-            highColor = '#525252'
-        
-    }
-    
-    
+//    if(currentAttribute == 'treeCanopyKey') {
+//        var lowColor = '#e5f5e0',
+//            highColor = '#006d2c'
+//    } else if (currentAttribute == 'propertyKey') {
+//        var lowColor = '#fee391',
+//            highColor = '#993404'
+//    } else if (currentAttribute == 'pollutantsKey') {
+//        var lowColor = '#fa9fb5',
+//            highColor = '#49006a'
+//    } else if (currentAttribute == 'stormwaterKey') {
+//        var lowColor = '#a6bddb',
+//            highColor = '#016c59'
+//    } else if (currentAttribute == 'carbonKey') {
+//        var lowColor = '#bdbdbd',
+//            highColor = '#525252'
+//        
+//    }
+//    
     var s = d3.scale.log();
     s.domain([values[0],values[values.length-1]]);
-    s.range([lowColor,highColor]);
+    s.range([allData[currentAttribute].lowColor,allData[currentAttribute].highColor]);
 //    console.log(s(v));
     
-    //updateLegend(s(v));
-    
-    
+ 
     return s(v);
     
     
@@ -239,7 +249,7 @@ function createPopup() {
 function drawLegend() {
 
     //set control position
-    var legend = L.control({position: 'topright'});
+    var legend = L.control({position: 'bottomright'});
 
     //cues for when legend is adding to map: div created
     legend.onAdd = function(map) {
@@ -250,23 +260,45 @@ function drawLegend() {
     };
 
     legend.addTo(map);
+    
+
 }
 
-function updateLegend(scale) {
+function updateLegend(values) {
+    console.log(values)
+    console.log(allData[currentAttribute].lowColor)
+    var s = d3.scale.log();
+    s.domain([values[0],values[values.length-1]]);
+    s.range([allData[currentAttribute].lowColor,allData[currentAttribute].highColor]);
+ 
+    var legend = $('.legend').html("<h3>" + allData[currentAttribute].descrip +  "</h3>");
+    //console.log(scale[0][4]);
     
-    var legend = $('.legend').html("<h3>" + allData[currentAttribute].descrip +  "</h3><ul>");
-    console.log(scale[0][4]);
+//    for (var i in scale) {
+//
+//        //append=populating legend
+//        legend.append('<li><span style="background:' + i + '"></span> ' +'</li>');
+////        legend.append('<li><span style="background:' + color + '"></span> ' +
+////                    (scale[i]).toLocaleString() + ' &mdash; ' +
+////                      (scale[i+1]).toLocaleString() + "%" + '</li>');
+//    }
+//
+//    legend.append("</ul>");
     
-    for (var i in scale) {
+    var svg = d3.select('.legend').append("svg");
 
-        //append=populating legend
-        legend.append('<li><span style="background:' + i + '"></span> ' +'</li>');
-//        legend.append('<li><span style="background:' + color + '"></span> ' +
-//                    (scale[i]).toLocaleString() + ' &mdash; ' +
-//                      (scale[i+1]).toLocaleString() + "%" + '</li>');
+    svg.append("g")
+      .attr("class", "legendLinear")
+      .attr("transform", "translate(0,0)");
+
+    var legendLinear = d3.legend.color()
+        .cells(values)
+//      .shapeWidth(30)
+//      .orient('horizontal')
+      .scale(s);
+
+    d3.select(".legendLinear")
+      .call(legendLinear);
+
     }
-
-    legend.append("</ul>");
-    
-}
 

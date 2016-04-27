@@ -12,7 +12,7 @@ var pollutantsContext = document.getElementById("pollutants").getContext("2d");
 var stormwaterContext = document.getElementById("stormwater").getContext("2d");
 
 $.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=JSON&q=SELECT * FROM canopydata_cd_use', function(data) {
-    console.log(data);
+    //console.log(data);
   
     data.rows.sort(function(a,b) {
      
@@ -20,7 +20,7 @@ $.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=JSON&q=SELECT * FR
     
     })
     
-    console.log(data);
+    //console.log(data);
     buildTreeCanopyChart(data);
     buildCarbonChart(data);
     buildPropChart(data);
