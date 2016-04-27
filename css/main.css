@@ -121,11 +121,11 @@ h1 {
 .description {
     position: absolute;
     z-index: 10;
-    left: 15px;
-    top: 90px;
+    left: 10px;
+    top: 78px;
     padding: 0 8px;
-    width: 230px;
-    height: 50%;
+    width: 318px;
+    max-height: 55%;
     overflow-y: scroll;
     background: whitesmoke;
     box-shadow: 0 1px 5px rgba(53,112,54,.65);

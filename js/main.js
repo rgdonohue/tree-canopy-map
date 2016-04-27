@@ -1,6 +1,6 @@
 
 var map = new L.Map("map", {
-    center: [38.04,-84.50],
+    center: [38.04,-84.54],
     zoom: 12
 });
 
