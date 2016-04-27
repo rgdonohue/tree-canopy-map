@@ -10,15 +10,8 @@ attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreet
 
 map.addLayer(layer);
 
-//main map
-
-//$.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM lexcouncildistricts_merge', function(data) {
-//    mapData(data);
-//});
-
 $.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM canopydata_cd_use', function(data) {
     mapData(data);
-    console.log(data);
 });
 
 
@@ -118,34 +111,14 @@ function getValues(layers) {
 }
     
 function getColor(v, values) {
- 
-//    if(currentAttribute == 'treeCanopyKey') {
-//        var lowColor = '#e5f5e0',
-//            highColor = '#006d2c'
-//    } else if (currentAttribute == 'propertyKey') {
-//        var lowColor = '#fee391',
-//            highColor = '#993404'
-//    } else if (currentAttribute == 'pollutantsKey') {
-//        var lowColor = '#fa9fb5',
-//            highColor = '#49006a'
-//    } else if (currentAttribute == 'stormwaterKey') {
-//        var lowColor = '#a6bddb',
-//            highColor = '#016c59'
-//    } else if (currentAttribute == 'carbonKey') {
-//        var lowColor = '#bdbdbd',
-//            highColor = '#525252'
-//        
-//    }
-//    
+
+  
     var s = d3.scale.log();
     s.domain([values[0],values[values.length-1]]);
     s.range([allData[currentAttribute].lowColor,allData[currentAttribute].highColor]);
-//    console.log(s(v));
     
- 
     return s(v);
-    
-    
+       
 }
 
 function highlightDistrict(disNum) {
@@ -181,7 +154,7 @@ function buildUI() {
         createPopup();
     });
     
-    $('nav li').on('click', function() {
+    $('button').on('click', function() {
         currentView = $(this).attr('id');
         
         colorize();
@@ -249,52 +222,34 @@ function createPopup() {
 function drawLegend() {
 
     //set control position
-    var legend = L.control({position: 'bottomright'});
+    var legend = L.control({position: 'topright'});
 
     //cues for when legend is adding to map: div created
     legend.onAdd = function(map) {
 
-        var div = L.DomUtil.create('div', 'legend');
+        var div = L.DomUtil.get('legend');
 
         return div;
     };
 
     legend.addTo(map);
     
-
 }
 
 function updateLegend(values) {
-    console.log(values)
-    console.log(allData[currentAttribute].lowColor)
+
     var s = d3.scale.log();
     s.domain([values[0],values[values.length-1]]);
     s.range([allData[currentAttribute].lowColor,allData[currentAttribute].highColor]);
  
-    var legend = $('.legend').html("<h3>" + allData[currentAttribute].descrip +  "</h3>");
-    //console.log(scale[0][4]);
+    var legend = $('#legend h3').text(allData[currentAttribute].descrip);
     
-//    for (var i in scale) {
-//
-//        //append=populating legend
-//        legend.append('<li><span style="background:' + i + '"></span> ' +'</li>');
-////        legend.append('<li><span style="background:' + color + '"></span> ' +
-////                    (scale[i]).toLocaleString() + ' &mdash; ' +
-////                      (scale[i+1]).toLocaleString() + "%" + '</li>');
-//    }
-//
-//    legend.append("</ul>");
-    
-    var svg = d3.select('.legend').append("svg");
-
-    svg.append("g")
+    d3.select('#legend svg').append("g")
       .attr("class", "legendLinear")
-      .attr("transform", "translate(0,0)");
+      .attr("transform", "translate(0,20)");
 
     var legendLinear = d3.legend.color()
-        .cells(values)
-//      .shapeWidth(30)
-//      .orient('horizontal')
+      .ascending(true)
       .scale(s);
 
     d3.select(".legendLinear")

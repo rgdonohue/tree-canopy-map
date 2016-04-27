@@ -1,7 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Muli:400,300);
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
 
 html {
-    color: #222;
+    color: #33532A;
     font-size: 1em;
     line-height: 1.4;
 }
@@ -34,15 +35,6 @@ video {
     vertical-align: middle;
 }
 
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-textarea {
-    resize: vertical;
-}
 
 .browserupgrade {
     margin: 0.2em 0;
@@ -52,100 +44,24 @@ textarea {
 }
 
 
-/* ===== Initializr Styles ==================================================
-   Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
-   ========================================================================== */
-
 body {
-    font: 16px/26px Helvetica, Helvetica Neue, Arial;
+    font: 16px/26px Muli, Helvetica, Helvetica Neue, Arial;
 }
 
 .wrapper {
-    width: 90%;
-    margin: 0 5%;
+    width: 100%;
+    margin: 0;
 }
 
-/* ===================
-    ALL: Green Theme
-   =================== */
-
-.header-container {
-    border-bottom: 4px solid lightgreen;
-    width: 25%;
-    position: absolute;
-    left: 0;
-    padding-left: 15px;
-    z-index: 100;
-}
-
-.footer-container,
-.main aside {
-    border-top: 20px solid lightgreen;
-}
-
-.header-container,
-.footer-container,
-.main aside {
-    background: darkgreen;
+.header-container{
+    background: whitesmoke;
 }
 
 .title {
-    color: white;
+    color: #599B42;
 }
 
-/* ==============
-    MOBILE: Menu
-   ============== */
 
-nav ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-nav a {
-    display: block;
-    margin-bottom: 10px;
-    padding: 15px 0;
-
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-
-    color: white;
-    background: green;
-}
-
-nav a:hover,
-nav a:visited {
-    color: white;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-/* ==============
-    MOBILE: Main
-   ============== */
-
-.main {
-    padding: 30px 0;
-}
-
-.main article h1 {
-    font-size: 2em;
-}
-
-.main aside {
-    color: white;
-    padding: 0px 5% 10px;
-}
-
-.footer-container footer {
-    color: white;
-    padding: 20px 0;
-}
 
 /* ===============
     ALL: IE Fixes
@@ -164,12 +80,22 @@ html, body, .main-container {
     padding: 0;
     margin: 0;
 }
+h1 {
+    position: absolute;
+    z-index: 100;
+    left: 48px;
+    margin: 10px 0 0 0;
+    background: whitesmoke;
+    box-shadow: 0 1px 5px rgba(53,112,54,.65);
+    border-radius: 4px;
+    padding: 13px 12px;
+}
 #map {
     width: 80%;
     height: 100%;
 }
-.leaflet-control-container .leaflet-left {
-    top: 90px;
+#current-goal-controls {
+    font-family: Muli;
 }
 #charts {
     position: absolute;
@@ -178,7 +104,6 @@ html, body, .main-container {
     right: 0;
     background: whitesmoke;
     width: 20%;
-    
 }
 #charts canvas {
     width: 90%;
@@ -186,52 +111,60 @@ html, body, .main-container {
     margin: 2px 0 0 0;
     padding: 0;
     border-bottom: 2px solid gray;
+    border-left: 2px solid gray;
+}
+#charts label {
+    color: #33532A;
+    float: right;
+    margin-right: 10px;
 }
 .description {
     position: absolute;
+    z-index: 10;
     left: 15px;
-    bottom: 0;
-    padding: 15px 8px;
+    top: 90px;
+    padding: 0 8px;
     width: 230px;
-    height: 500px;
+    height: 50%;
     overflow-y: scroll;
     background: whitesmoke;
+    box-shadow: 0 1px 5px rgba(53,112,54,.65);
     display: none;
 }
 .treeCanopyKey {
     display: block;
 }
- .legend {
+#legend {
+    background: whitesmoke;
+    box-shadow: 0 1px 5px rgba(53,112,54,.65);
     padding: 6px 8px;
-    font-size: 1em;
-    background: #fff;
-    box-shadow: 0 3px 14px rgba(0,0,0,.4);
-    color: whitesmoke;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
-    width: 160px;
+    border-radius: 4px;
+    width: 200px;
     z-index: 10;
-    margin-right: 300px;
 }
-.legend h3 {
-    font-size: 1.1em;
-    font-weight: bold;
+#legend h3 {
+    font-size: 1.3em;
+    font-weight: normal;
     line-height: 1em;
-    color: #3d3d3d;
-    margin: 0;
+    color: #33532A;
+    margin: 10px 0 0;
 }
-
+#legend button {
+    font-size: 1.3em;
+    padding: 4px 9px;
+    width: 48%
+}
 #hover-window {
-    background: #fff;
-    box-shadow: 0 3px 14px rgba(0,0,0,.4);
+    background: whitesmoke;
+    box-shadow: 0 1px 5px rgba(0,0,0,.65);
+    padding: 6px 8px;
+    border-radius: 4px;
     min-height: 40px;
     min-width: 60px;
-    padding: 1px;
     text-align: left;
-    border-radius: 4px;
     position: absolute;
+    z-index: 10;
     display: none;
-    padding: 6px 8px;
 }
 
 /* ==========================================================================
@@ -246,7 +179,7 @@ html, body, .main-container {
 
     nav a {
         float: left;
-        width: 27%;
+        width: 40%;
         margin: 0 1.7%;
         padding: 25px 2%;
         margin-bottom: 0;
@@ -321,7 +254,7 @@ html, body, .main-container {
    =============== */
 
     .wrapper {
-        width: 1026px; /* 1140px - 10% for margins */
+        width: 100%; /* 1140px - 10% for margins */
         margin: 0 auto;
     }
 }
