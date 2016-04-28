@@ -157,16 +157,23 @@ function dehighlightDistrict() {
 }
 
 function buildUI() {
-    $("#charts label").on('click', function() {
-        currentAttribute = $(this).attr('data-key');
+    
+    $("#charts label button").on('click', function() {
+        currentAttribute = $(this).parent().attr('data-key');
+        $('#charts button').css({'color': '#3d3d3d', 'font-weight': 'normal'})
+        $(this).css({'color': allData[currentAttribute].range[3], 'font-weight': 'bold'} );
+        $('#' + currentView).css({'color': allData[currentAttribute].range[3], 'font-weight': 'bold'} );
         colorize();
         showInfo();
         createPopup();
     });
+
+    $('#' + currentView).css({'color': allData[currentAttribute].range[3], 'font-weight': 'bold'} );
     
-    $('button').on('click', function() {
+    $('#current-goal-controls button').on('click', function() {
         currentView = $(this).attr('id');
-        
+        $('#current-goal-controls button').css({'color': '#3d3d3d', 'font-weight': 'normal'})
+        $(this).css({'color': allData[currentAttribute].range[3], 'font-weight': 'bold'} );
         colorize();
         createPopup();
     });
@@ -183,24 +190,9 @@ function createPopup() {
         
         var props = layer.feature.properties
         var description = allData[currentAttribute].descrip;
-//        console.log(description);
-        
-        //current and goal vals displayed
-        
-//        var currentVal= layer.feature.properties[allData[currentAttribute].current];
-//        var goalVal = layer.feature.properties[allData[currentAttribute].goal];
-//    
-//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ "current: " + currentVal+"<br>"+ "goal: "+ goalVal);
-        
-        //just [currentView] vals shown
-        
+
         var value = layer.feature.properties[allData[currentAttribute][currentView]];
-//    
-//        layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description + "<br>"+ currentView + " value: " + value);
-        
-        //hover 
-        
-        //layer.bindPopup("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ currentView + " value: " + value);
+
         
         var infoWindow = $('#hover-window');
         layer.on('mouseover', function (e) {

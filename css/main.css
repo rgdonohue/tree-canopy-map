@@ -119,11 +119,29 @@ h1 {
     float: right;
     margin-right: 10px;
 }
+#charts label button {
+    font-size: 1em;
+    padding: 4px 9px;
+    margin: 5px 10px 0 0;
+}
+.about {
+    position: absolute;
+    z-index: 10;
+    left: 10px;
+    top: 80px;
+    padding: 0 8px;
+    width: 318px;
+    max-height: 25%;
+    overflow: hidden;
+    background: whitesmoke;
+    box-shadow: 0 1px 5px rgba(53,112,54,.65);
+}
 .description {
     position: absolute;
     z-index: 10;
     left: 10px;
-    top: 78px;
+    top: 50%;
+    bottom: 10px;
     padding: 0 8px;
     width: 318px;
     max-height: 55%;
@@ -131,6 +149,10 @@ h1 {
     background: whitesmoke;
     box-shadow: 0 1px 5px rgba(53,112,54,.65);
     display: none;
+}
+.description h2 {
+    font-size: 1.2em;
+    margin: 8px 0 0;
 }
 .treeCanopyKey {
     display: block;
@@ -153,7 +175,8 @@ h1 {
 #legend button {
     font-size: 1.3em;
     padding: 4px 9px;
-    width: 48%
+    width: 48%;
+    color: #3d3d3d;
 }
 #hover-window {
     background: whitesmoke;
