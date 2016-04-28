@@ -25,35 +25,45 @@ var allData = {
         goal : 'goalcanopypercen',
         descrip : 'percent of canopy cover',
         lowColor: '#e5f5e0',
-        highColor: '#006d2c'
+        highColor: '#006d2c',
+        domain: [20,25,30,35,40],
+        range: ['#a1d99b', '#74c476', '#41ab5d', '#238b45', '#006d2c']
     },
     propertyKey : {
         current : 'propvalmillcontribute',
         goal : 'goalpropvalmillcontribute',
         descrip : 'millions of $ contributed to property values, annually',
         lowColor: '#fee391',
-        highColor: '#993404'
+        highColor: '#993404',
+        domain: [10, 18, 26, 34, 40],
+        range: ['#fec44f', '#fe9929', '#ec7014', '#cc4c02', '#993404']
     },
     pollutantsKey: {
         current: 'airqualitylbspollutants',
         goal: 'goalairqualitylbspollutants',
         descrip : 'lbs of pollutants removed from air, annually',
         lowColor: '#fa9fb5',
-        highColor: '#49006a'
+        highColor: '#49006a',
+        domain: [41500, 69500, 97500, 125500, 181000],
+        range: ['#fa9fb5', '#f768a1', '#dd3497', '#ae017e', '#7a0177']
     },
     stormwaterKey: {
         current: 'runoffmillgallsreduced',
         goal: 'goalrunoffmillgallsreduced',
         descrip : 'millions of gallons of runoff water reduced, annually',
         lowColor: '#a6bddb',
-        highColor: '#016c59'
+        highColor: '#016c59',
+        domain: [92, 146, 200, 254, 310],
+        range: ['#a8ddb5', '#7bccc4', '#4eb3d3', '#2b8cbe', '#0868ac']
     },
     carbonKey: {
         current: 'carbonstoredsequesttonsannually',
         goal: 'goalcarbonstoredsequesttonsannually',
         descrip: 'tons of carbon stored and sequestered, annually',
         lowColor: '#bdbdbd',
-        highColor: '#525252'
+        highColor: '#525252',
+        domain: [82000, 132000, 182000, 232000, 280000],
+        range: ['#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#bd0026']
     }
 }
 
@@ -112,10 +122,10 @@ function getValues(layers) {
     
 function getColor(v, values) {
 
-  
-    var s = d3.scale.log();
-    s.domain([values[0],values[values.length-1]]);
-    s.range([allData[currentAttribute].lowColor,allData[currentAttribute].highColor]);
+    
+    var s = d3.scale.quantile();
+        s.domain(allData[currentAttribute].domain);
+        s.range(allData[currentAttribute].range) 
     
     return s(v);
        
@@ -238,9 +248,10 @@ function drawLegend() {
 
 function updateLegend(values) {
 
-    var s = d3.scale.log();
-    s.domain([values[0],values[values.length-1]]);
-    s.range([allData[currentAttribute].lowColor,allData[currentAttribute].highColor]);
+    
+    var s = d3.scale.quantile();
+        s.domain(allData[currentAttribute].domain);
+        s.range(allData[currentAttribute].range) 
  
     var legend = $('#legend h3').text(allData[currentAttribute].descrip);
     
