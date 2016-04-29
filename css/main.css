@@ -192,7 +192,9 @@ h1 {
 }
 .leaflet-control-geosearch {
     position: absolute;
-    top: 250px;
+    top: 10px;
+    left: 550px;
+    box-shadow: 0 1px 5px rgba(0,0,0,.65);
 /*
     right: 100px;
     bottom: 10px;
@@ -202,9 +204,9 @@ h1 {
 }
 .leaflet-control-geosearch input {
     width: 96%; 
-    padding: 5px 8px;
-    background: whitesmoke ;
-    bordere: 2px solid #302725;
+    padding: 6px 8px;
+    background: #A0A0A0 ;
+    bordere: 2px #A0A0A0;
     color: #A0A0A0 ;
 }
 .leaflet-control-geosearch-msg ul {
@@ -283,6 +285,7 @@ h1 {
 
     .title {
         float: left;
+        font-size: 4.5em;
     }
 
     nav {

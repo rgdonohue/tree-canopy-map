@@ -4,6 +4,12 @@ var map = new L.Map("map", {
     zoom: 12
 });
 
+var getBounds = map.getBounds();
+          
+var bounds = L.latLngBounds(getBounds);    
+        
+map.setMaxBounds(bounds);
+
 var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
 });
@@ -70,8 +76,6 @@ var allData = {
         range: ['#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#bd0026']
     }
 }
-
-//console.log(allData[currentAttribute].descrip);
 
 function mapData(data) {
     
