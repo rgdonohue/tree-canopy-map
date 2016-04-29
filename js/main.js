@@ -85,8 +85,7 @@ function mapData(data) {
                 width: 1,
                 color: 'white'
             }
-        }
-        
+        }  
     }).addTo(map);
     
     
@@ -108,6 +107,22 @@ function colorize() {
            fillColor: getColor(l.feature.properties[allData[currentAttribute][currentView]], values),
            fillOpacity: .8
        }) 
+       
+        l.on('mouseover', function() {
+
+            l.setStyle({
+                color: 'yellow'
+            });
+            l.bringToFront();
+
+        });
+        
+        l.on('mouseout', function() {
+            l.setStyle({
+                color: 'white'
+            });
+        });
+        
     });
     
     updateLegend(values);

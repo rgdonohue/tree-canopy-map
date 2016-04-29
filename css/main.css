@@ -85,9 +85,9 @@ h1 {
     z-index: 100;
     left: 48px;
     margin: 10px 0 0 0;
-    background: whitesmoke;
-    box-shadow: 0 1px 5px rgba(53,112,54,.65);
-    border-radius: 4px;
+/*    background: whitesmoke;*/
+/*    box-shadow: 0 1px 5px rgba(53,112,54,.65);*/
+/*    border-radius: 4px;*/
     padding: 13px 12px;
 }
 #map {
@@ -131,8 +131,8 @@ h1 {
     top: 80px;
     padding: 0 8px;
     width: 318px;
-    max-height: 25%;
-    overflow: hidden;
+    height: 500px;
+/*    overflow: scroll;*/
     background: whitesmoke;
     box-shadow: 0 1px 5px rgba(53,112,54,.65);
 }
