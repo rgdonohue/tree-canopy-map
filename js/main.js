@@ -1,4 +1,5 @@
 
+
 var map = new L.Map("map", {
     center: [38.04,-84.54],
     zoom: 12
@@ -22,8 +23,20 @@ $.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT *
 
 new L.Control.GeoSearch({
         provider: new L.GeoSearch.Provider.Esri(),
-        position: 'topleft',
+        position: 'topright',
     }).addTo(map);
+
+$('.leaflet-control-geosearch').detach().removeClass('leaflet-control').appendTo('.about');
+
+$('.why-this-matters').on('click', function() {
+    $('.cover-all').fadeIn();
+    $('.meaning').fadeIn();
+});
+
+$('.cover-all, .close-meaning').on('click', function() {
+    $('.cover-all').fadeOut();
+    $('.meaning').fadeOut();
+});
 
 var currentAttribute = 'treeCanopyKey',
     currentView = 'current',
@@ -283,5 +296,5 @@ function updateLegend(values) {
     d3.select(".legendLinear")
       .call(legendLinear);
 
-    }
+}
 
