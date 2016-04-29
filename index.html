@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css">
 
         <link rel="stylesheet" href="css/main.css">
+        
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
@@ -27,7 +28,7 @@
     <![endif]-->
 
 
-    <h1 class="title">Tree Canopy Map</h1>
+    <h1 class="title">Tree Canopy in Lexington</h1>
     <div id='legend'>
         <div id="current-goal-controls">
             <button id='current'>current</button>
@@ -50,22 +51,27 @@
         <canvas id="carbon"></canvas>
     </div>
     <div class='about'>
+        <h2>TREES</h2>
     <p>Bacon ipsum dolor amet drumstick tri-tip bresaola pork belly jerky kielbasa. Leberkas pork belly tail meatloaf short ribs ground round fatback cupim turkey biltong pig corned beef boudin. Swine ham brisket short ribs bresaola salami pork boudin spare ribs chicken prosciutto beef ribs. Doner ribeye pork chop chuck ground round beef. Flank kielbasa t-bone ground round pastrami spare ribs jowl chuck meatball chicken biltong.</p>
     </div>
     <div class="description treeCanopyKey">
-        <h2>Tree Canopy</h2>
+        <h2>Tree Canopy Cover</h2>
         <p>Tree canopies are great. Currently, Lexington has 25% canopy, which provides a total of $xxx in ecosystem services. After a tree canopy assessment was completed, it was determined that Lexington has the potential for 54% canopy, which would mean Lexington's trees would provide its citizens up to $xxx in services! LFUCG is making a push to increase our canopy and has set a goal of 30%. Take a look and explore how such a small increase of 5% can have a huge impact. </p>
     </div>
     <div class="description propertyKey">
+        <h2>Property Value Increase</h2>
         <p>This map shows how tree canopy contributes to property value. Trees create an environment that we want to live in: shade, beauty, greenery, happiness, healthfulness. As we protect mature trees and plant new trees, values for any type of property increase at an average of 7%. Currently, trees contribute $240 million in property value. With a 5% canopy increase, this number would increase to $293 million. Trees revive!</p>
     </div>
     <div class="description pollutantsKey">
+        <h2>Air Quality</h2>
         <p>This map shows how tree canopy improves Lexington’s air quality. Trees absorb millions of pounds of pollutants from the air each year, including carbon monoxide (CO), nitrogen dioxide (NO2), ozone (O3), sulfur dioxide (SO2) and capture solid particulate matter like dust and soot on their leaves. As trees do this, air pollution rates in our city decrease, along with rates of heart and lung disease, asthma, and pulmonary and cardiovascular disease. Currently, trees remove 1.12 million  lbs of pollutants from the air each year, valued at $1.16 million. With a 5% canopy increase, canopy would remove $1.4 lbs of pollutants from our air, equating $1.41 million in value. Trees clean the air! </p>
     </div>
      <div class="description stormwaterKey">
-        <p>This map shows how trees contribute to stormwater runoff. Trees directly absorb rainwater which helps slow down and decrease the amount of rainwater that reaches storm drains, which are susceptible to overflow. Trees also reduce soil erosion which prevents pollutants from entering nearby waterways. Currently, Lexington is under federal order to reduce the amount of sewer overflow in Fayette County’s streams. Currently, trees intercept 1.93 billion gallons of stormwater each year, a $15 million value. With a 5% increase, Lexington’s canopy would intercept 2.36 billion gallons, equating $18.32 million in value. Trees reduce, runoff,  flooding, and water pollution!   </p>
+         <h2>Stormwater Runoff Reduction</h2>
+        <p>This map shows how trees reduce stormwater runoff. Trees directly absorb rainwater which helps slow down and decrease the amount of rainwater that reaches storm drains, which are susceptible to overflow. Trees also reduce soil erosion which prevents pollutants from entering nearby waterways. Currently, Lexington is under federal order to reduce the amount of sewer overflow in Fayette County’s streams. Currently, trees intercept 1.93 billion gallons of stormwater each year, a $15 million value. With a 5% increase, Lexington’s canopy would intercept 2.36 billion gallons, equating $18.32 million in value. Trees reduce, runoff,  flooding, and water pollution!   </p>
     </div>
      <div class="description carbonKey">
+         <h2>Carbon Storage and Sequestration</h2>
         <p>This map shows the amount of carbon dioxide (CO2) that Lexington’s trees store and sequester. Trees take carbon from the air and store massive amounts of it in their woody tissue. As they grow, this amount increases. CO2 is one of the major greenhouse gases and trees naturally reduce our city’s carbon footprint. Currently, Lexington’s trees store and sequester 1.74 million tons of carbon each year, valued at $33.68 million. With a 5% increase in canopy, 2.31 million ton of carbon would be stored and sequestered, valued at $41.11 million. Trees help mitigate climate change!</p>
     </div>
     
@@ -76,6 +82,8 @@
     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.10.0/d3-legend.min.js"></script>
+    <script src="js/l.control.geosearch.js"></script>
+    <script src="js/l.geosearch.provider.esri.js"></script>
     <script src="js/chart.js"></script>
     <script src="js/main.js"></script>
 

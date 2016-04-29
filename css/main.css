@@ -190,6 +190,40 @@ h1 {
     z-index: 10;
     display: none;
 }
+.leaflet-control-geosearch {
+    position: absolute;
+    top: 250px;
+/*
+    right: 100px;
+    bottom: 10px;
+*/
+    width: 264px;
+    z-index: 10;
+}
+.leaflet-control-geosearch input {
+    width: 96%; 
+    padding: 5px 8px;
+    background: whitesmoke ;
+    bordere: 2px solid #302725;
+    color: #A0A0A0 ;
+}
+.leaflet-control-geosearch-msg ul {
+    list-style: none;
+    display: none;
+    height: auto;
+    background: none;
+    padding: 0;
+    position: absolute;
+    top: -220%;
+    z-index: 200;
+    background: #d48983;
+}
+.leaflet-control-geosearch ul li {
+    border-radius: 4px;
+    padding: 4px 8px;
+    font: 1em "Ubuntu";
+    color: whitesmoke;
+}
 
 /* ==========================================================================
    Media Queries

@@ -48,17 +48,11 @@ function buildTreeCanopyChart(dataObject) {
                 {
                     label: "My First dataset",
                     fillColor: "#e5f5e0",
-//                    strokeColor: "rgba(220,220,220,0.8)",
-//                    highlightFill: "rgba(183, 203, 255, 1)",
-//                    highlightStroke: "rgba(220,220,220,1)",
                     data: currentData
                 },
                 {
                     label: "My Second dataset",
                     fillColor: "#006d2c",
-//                    strokeColor: "rgba(220,220,220,0.8)",
-//                    highlightFill: "rgba(220,220,220, 1)",
-//                    highlightStroke: "rgba(220,220,220,1)",
                     data: goalData
                 }
             ]

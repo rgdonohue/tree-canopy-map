@@ -14,6 +14,10 @@ $.getJSON('https://lfgreenfield.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT *
     mapData(data);
 });
 
+new L.Control.GeoSearch({
+        provider: new L.GeoSearch.Provider.Esri(),
+        position: 'topleft',
+    }).addTo(map);
 
 var currentAttribute = 'treeCanopyKey',
     currentView = 'current',
@@ -197,10 +201,12 @@ function createPopup() {
         var infoWindow = $('#hover-window');
         layer.on('mouseover', function (e) {
             var props = this.feature.properties,
-                value = this.feature.properties[allData[currentAttribute][currentView]];
+                currentVal = props[(allData[currentAttribute].current)],
+                goalVal = props[(allData[currentAttribute].goal)];      
       
             infoWindow.show();
-            infoWindow.html("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ currentView + " value: " + value);
+            infoWindow.html("<b>"+"District "+props.district+"</b><br>"+ description+ "<br>"+ "current value: "+currentVal + "<br>"+ "goal value: "+goalVal);
+            
             $(document).mousemove(function(e){
                 // first offset from the mouse position of the info window
                 infoWindow.css({"left": e.pageX + 6, "top": e.pageY - infoWindow.height() - 15}); 
