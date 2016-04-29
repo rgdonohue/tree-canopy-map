@@ -95,18 +95,18 @@ function buildCarbonChart(dataObject) {
         datasets: [
                 {
                     label: "My First dataset",
-                    fillColor: "rgba(183, 203, 255, 0.75)",
-                    strokeColor: "rgba(220,220,220,0.8)",
-                    highlightFill: "rgba(183, 203, 255, 1)",
-                    highlightStroke: "rgba(220,220,220,1)",
+                    fillColor: '#feb24c',
+//                    strokeColor: "rgba(220,220,220,0.8)",
+//                    highlightFill: "rgba(183, 203, 255, 1)",
+//                    highlightStroke: "rgba(220,220,220,1)",
                     data: currentData
                 },
                 {
                     label: "My Second dataset",
-                    fillColor: "rgba(220,220,220, 0.75)",
-                    strokeColor: "rgba(220,220,220,0.8)",
-                    highlightFill: "rgba(220,220,220, 1)",
-                    highlightStroke: "rgba(220,220,220,1)",
+                    fillColor: "#bd0026",
+//                    strokeColor: "rgba(220,220,220,0.8)",
+//                    highlightFill: "rgba(220,220,220, 1)",
+//                    highlightStroke: "rgba(220,220,220,1)",
                     data: goalData
                 }
             ]

@@ -2,8 +2,13 @@
 
 var map = new L.Map("map", {
     center: [38.04,-84.54],
-    zoom: 12
+    zoom: 12,
+    minZoom: 12,
+    maxZoom:15,
+    zoomControl: false,
 });
+
+new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
 
 var getBounds = map.getBounds();
           
